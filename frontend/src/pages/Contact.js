@@ -9,6 +9,8 @@ const offices = [
   { flag: '🇺🇸', country: 'United States', label: 'Delivery Centre', email: 'us@aadhyarajtech.com', phone: '+1 800 000 0000' },
   { flag: '🇬🇧', country: 'United Kingdom', label: 'Delivery Centre', email: 'uk@aadhyarajtech.com', phone: '+44 20 0000 0000' },
   { flag: '🇦🇺', country: 'Australia', label: 'Delivery Centre', email: 'au@aadhyarajtech.com', phone: '+61 2 0000 0000' },
+  { flag: '🇳🇿', country: 'New Zealand', label: 'Delivery Centre', email: 'nz@aadhyarajtech.com', phone: '+64 9 000 0000' },
+  { flag: '🇲🇾', country: 'Malaysia', label: 'Delivery Centre', email: 'my@aadhyarajtech.com', phone: '+60 3 0000 0000' },
 ];
 
 const Contact = () => {

@@ -1,8 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from '../api';
 import { Link } from 'react-router-dom';
 import './Footer.css';
 import logo from '../assets/logo1.png';
 const Footer = () => {
+  const [services, setServices] = useState([]);
+
+    useEffect(() => {
+      const fetchServices = async () => {
+        try {
+          const response = await axios.get('/api/services');
+
+          if (Array.isArray(response.data.data)) {
+            setServices(response.data.data);
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      };
+
+      fetchServices();
+    }, []);
   const year = new Date().getFullYear();
 
   return (
@@ -45,12 +63,13 @@ const Footer = () => {
           <div className="footer-col">
             <h4>Our Services</h4>
             <ul>
-              <li><a href="/services">Custom Software</a></li>
-              <li><a href="/services">Web Solutions</a></li>
-              <li><a href="/services">IT Consulting</a></li>
-              <li><a href="/services">Cloud & DevOps</a></li>
-              <li><a href="/services">Maintenance</a></li>
-              <li><a href="/services">Training</a></li>
+              {services.map((service, i) => (
+                <li key={i}>
+                  <a href="/services">
+                    {service.title || service.name}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 
