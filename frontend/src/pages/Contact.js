@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import axios from '../api';;
+import axios from '../api';
 import { toast } from 'react-toastify';
 import './Contact.css';
 

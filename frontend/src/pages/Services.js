@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from '../api';;
+import axios from '../api';
 import './Services.css';
 
 const defaultServices = [

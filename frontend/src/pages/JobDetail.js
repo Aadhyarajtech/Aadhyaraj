@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import axios from '../api';;
+import axios from '../api';
 import { toast } from 'react-toastify';
 import './JobDetail.css';
 
