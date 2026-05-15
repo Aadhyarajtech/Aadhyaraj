@@ -54,12 +54,19 @@ const Home = () => {
   const heroRef = useRef(null);
 
   useEffect(() => {
-    axios.get('/api/services').then(r => setServices(r.data.data)).catch(() => {});
-    axios.get('/api/testimonials').then(r => setTestimonials(r.data.data)).catch(() => {});
+    // axios.get('/api/services').then(r => setServices(r.data.data)).catch(() => {});
+    // axios.get('/api/testimonials').then(r => setTestimonials(r.data.data)).catch(() => {});
+    axios.get('/api/services')
+      .then(r => setServices(r?.data?.data || []))
+      .catch(() => setServices([]));
+
+    axios.get('/api/testimonials')
+      .then(r => setTestimonials(r?.data?.data || []))
+      .catch(() => setTestimonials([]));
   }, []);
 
   useEffect(() => {
-    if (testimonials.length === 0) return;
+    if (!testimonials || testimonials.length === 0) return;
     const t = setInterval(() => setActiveTestimonial(p => (p + 1) % testimonials.length), 5000);
     return () => clearInterval(t);
   }, [testimonials]);
