@@ -1,0 +1,22 @@
+.testimonials-page { min-height: 100vh; background: var(--light-gray); }
+.testimonials-hero { padding: 8rem 0 4rem; text-align: center; background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%); }
+.page-title { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; color: #fff; margin-bottom: 1rem; font-family: var(--font-display); }
+.page-subtitle { font-size: 1.1rem; color: rgba(255,255,255,0.75); max-width: 600px; margin: 0 auto; }
+.testimonials-section { padding: 4rem 0 6rem; }
+.testimonial-slider { max-width: 800px; margin: 0 auto; opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.testimonial-slider.visible { opacity: 1; transform: translateY(0); }
+.testimonial-card { background: #fff; border: 1px solid var(--border); border-radius: 20px; padding: 3rem; position: relative; box-shadow: var(--shadow-md); }
+.testimonial-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--navy), var(--navy-light)); border-radius: 20px 20px 0 0; }
+.quote-mark { font-family: var(--font-display); font-size: 6rem; color: var(--navy-mid); opacity: 0.15; line-height: 0.5; margin-bottom: 1.5rem; }
+.testimonial-text { font-family: var(--font-display); font-size: 1.2rem; font-style: italic; color: var(--text-body); line-height: 1.7; margin-bottom: 2rem; }
+.testimonial-author { display: flex; align-items: center; gap: 1rem; }
+.author-avatar { width: 48px; height: 48px; background: linear-gradient(135deg, var(--navy), var(--navy-mid)); display: flex; align-items: center; justify-content: center; font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; color: #fff; border-radius: 50%; flex-shrink: 0; }
+.author-name { font-family: var(--font-heading); font-size: 1rem; font-weight: 700; color: var(--text-dark); }
+.author-role { font-size: 0.8rem; color: var(--text-muted); }
+.stars { margin-left: auto; color: #f59e0b; font-size: 1rem; letter-spacing: 2px; }
+.testimonial-dots { display: flex; justify-content: center; gap: 0.5rem; margin-top: 2rem; }
+.dot { width: 24px; height: 3px; background: var(--border); border: none; transition: all 0.3s; cursor: pointer; border-radius: 2px; }
+.dot.active { width: 48px; background: var(--navy-mid); }
+.no-testimonials { text-align: center; color: var(--text-muted); padding: 3rem; }
+.reveal { opacity: 0; transform: translateY(25px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
