@@ -448,11 +448,24 @@ const Home = () => {
             <h2 className="section-title">Let's Build Something <span>Extraordinary</span></h2>
             <p>Partner with AadhyaRaj Technologies and transform your business with cutting-edge IT solutions tailored to your needs.</p>
             <div className="cta-actions">
+              <Link to="/services" className="btn-outline">
+                <span>View Services</span>
+              </Link>
+
               <Link to="/contact" className="btn-primary">
                 <span>Contact us</span>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
               </Link>
-              <Link to="/services" className="btn-outline"><span>View Services</span></Link>
             </div>
           </div>
         </div>

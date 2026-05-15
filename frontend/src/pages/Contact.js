@@ -233,7 +233,7 @@ const Contact = () => {
                       <span className="office-mini-flag">{o.flag}</span>
                       <div>
                         <div className="office-mini-country">{o.country}</div>
-                        <a href={`mailto:${o.email}`} className="office-mini-email">{o.email}</a>
+                        {/* <a href={`mailto:${o.email}`} className="office-mini-email">{o.email}</a> */}
                       </div>
                     </div>
                   ))}

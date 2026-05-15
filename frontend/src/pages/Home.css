@@ -471,10 +471,60 @@
   .about-strip-visual { height: 300px; }
 }
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
   .services-grid { grid-template-columns: 1fr; }
   .hero-title { font-size: clamp(2.5rem, 10vw, 4rem); }
   .globe-visual { width: 260px; height: 260px; }
   .testimonial-card { padding: 2rem 1.5rem; }
+} */
+@media (max-width: 768px) {
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    padding: 7rem 1.5rem 4rem;
+    background-position: 65% center;
+  }
+
+  .hero-content {
+    transform: translateX(0);
+    max-width: 100%;
+  }
+
+  .hero-title {
+    font-size: 3.2rem;
+    line-height: 1.1;
+  }
+
+  .hero-desc {
+    font-size: 1rem;
+    line-height: 1.7;
+    max-width: 100%;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-actions a {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .globe-visual {
+    width: 260px;
+    height: 260px;
+  }
+
+  .testimonial-card {
+    padding: 2rem 1.5rem;
+  }
 }

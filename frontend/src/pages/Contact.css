@@ -66,10 +66,25 @@
 
 .offices-mini { border-top: 1px solid var(--border); padding-top: 2rem; }
 .offices-mini h4 { font-family: var(--font-heading); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1.25rem; }
-.offices-mini-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
-.office-mini { display: flex; align-items: center; gap: 0.5rem; padding: 0.6rem 0.8rem; background: var(--light-gray); border: 1px solid var(--border); border-radius: 8px; font-size: 0.82rem; color: var(--text-body); transition: var(--transition); }
+.offices-mini-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.office-mini {   display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  min-height: 62px;
+  padding: 1rem 1.2rem;
+
+  background: #f8f9fb;
+  border: 1px solid #cfd6df;
+  border-radius: 10px;
+
+  font-size: 1rem;
+  color: var(--text-body);
+
+  transition: var(--transition); }
 .office-mini:hover { border-color: rgba(30,64,175,0.2); background: var(--accent-pale); color: var(--navy-mid); }
 .office-mini .flag { font-size: 1rem; }
+
 
 .success-message { text-align: center; padding: 3rem 2rem; }
 .success-icon { font-size: 3rem; margin-bottom: 1.5rem; }

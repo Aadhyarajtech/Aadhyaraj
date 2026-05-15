@@ -300,6 +300,12 @@
   .story-inner, .global-inner { grid-template-columns: 1fr; gap: 3rem; }
   .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
   .tech-categories-grid { grid-template-columns: repeat(2, 1fr); }
+  .mission-grid .mission-card:last-child {
+  grid-column: 1 / -1;
+  justify-self: center;
+  max-width: 470px;
+  width: 100%;
+}
 }
 
 @media (max-width: 768px) {

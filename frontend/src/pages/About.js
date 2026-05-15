@@ -403,7 +403,7 @@ const About = () => {
       </section>
 
       {/* LEADERSHIP */}
-      <section className="team-section">
+      {/* <section className="team-section">
         <div className="container">
           <div className="section-header reveal">
             <p className="section-subtitle">Leadership</p>
@@ -425,7 +425,7 @@ const About = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* GLOBAL */}
       <section className="global-section">

@@ -21,10 +21,12 @@ import AdminApplications from './pages/AdminApplications';
 import AdminContacts from './pages/AdminContacts';
 import ProtectedRoute from './components/ProtectedRoute';
 import './App.css';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <div className="App">
         <Navbar />
         <Routes>
