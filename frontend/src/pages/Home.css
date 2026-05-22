@@ -528,4 +528,34 @@
   .testimonial-card {
     padding: 2rem 1.5rem;
   }
+  .visual-hexagon {
+  position: relative;
+  top: auto;
+  left: auto;
+  transform: none;
+  margin: 2rem auto;
+}
+
+.about-strip-visual {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.visual-card {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+}
+
+.vc-1,
+.vc-2,
+.vc-3 {
+  top: auto;
+  left: auto;
+  right: auto;
+  bottom: auto;
+}
 }
