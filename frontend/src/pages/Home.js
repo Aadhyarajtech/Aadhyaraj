@@ -445,7 +445,7 @@ const Home = () => {
         <div className="cta-glow"></div>
         <div className="container">
           <div className="cta-inner reveal">
-            <p className="section-subtitle">Ready to Start?</p>
+            <p className="section-subtitle" style={{ color: '#fff' }}>Ready to Start?</p>
             <h2 className="section-title">Let's Build Something <span>Extraordinary</span></h2>
             <p>Partner with AadhyaRaj Technologies and transform your business with cutting-edge IT solutions tailored to your needs.</p>
             <div className="cta-actions">

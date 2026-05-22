@@ -17,8 +17,8 @@
 .page-hero-orb { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 500px; height: 300px; background: radial-gradient(ellipse, rgba(59,130,246,0.15) 0%, transparent 70%); }
 
 .page-hero-content { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
-.page-hero-content .section-subtitle { color: #93c5fd; }
-.page-hero-content .section-title { color: #fff; }
+.page-hero-content .section-subtitle { color: #ffffff !important; }
+.page-hero-content .section-title { color: #ffffff !important; }
 .page-hero-content .section-title span { color: #93c5fd; font-style: italic; }
 .page-hero-content .gold-line { background: linear-gradient(90deg, #93c5fd, transparent); }
 .page-hero-content p:last-child { font-size: 1rem; color: rgba(255,255,255,0.7); margin-top: 1.25rem; line-height: 1.8; }

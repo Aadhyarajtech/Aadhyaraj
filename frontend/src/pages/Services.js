@@ -235,8 +235,8 @@ const Services = () => {
         <div className="cta-glow"></div>
         <div className="container">
           <div className="reveal">
-            <p className="section-subtitle">Start Today</p>
-            <h2 className="section-title">Ready to <span>Transform</span> Your Business?</h2>
+            <p className="section-subtitle" style={{ color: '#fff' }}>Start Today</p>
+            <h2 className="section-title" style={{ color: '#fff' }}>Ready to <span>Transform</span> Your Business?</h2>
             <p style={{ fontFamily: 'var(--font-body)', color: 'rgba(255,255,255,0.5)', maxWidth: 500, margin: '1rem auto 2.5rem', lineHeight: 1.7 }}>
               Let's discuss your requirements and explore how AadhyaRaj Technologies can deliver the perfect IT solution for you.
             </p>

@@ -34,6 +34,39 @@ const AdminApplications = () => {
     if (!dateString) return 'N/A';
     return new Date(dateString).toLocaleString();
   };
+ const updateApplicationStatus = async (id, status) => {
+  try {
+    const response = await axios.put(
+      `/api/careers/applications/${id}`,
+      { status },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+
+    if (response.data.success) {
+      setApplications(prev =>
+        prev.map(app =>
+          app._id === id ? { ...app, status } : app
+        )
+      );
+
+      toast.success('Status updated successfully');
+    } else {
+      toast.error(response.data.message || 'Update failed');
+    }
+  } catch (error) {
+    console.log(error);
+
+    toast.error(
+      error.response?.data?.message ||
+      error.message ||
+      'Failed to update status'
+    );
+  }
+};
 
   const renderResume = (resume) => {
     if (!resume) return 'No resume';
@@ -88,7 +121,30 @@ const AdminApplications = () => {
                     <td>{application.phone || 'N/A'}</td>
                     <td>{application.career?.title || 'N/A'}</td>
                     <td>{renderResume(application.resume)}</td>
-                    <td><span className={`badge ${application.status === 'pending' ? 'badge-inactive' : 'badge-active'}`}>{application.status || 'pending'}</span></td>
+                    {/*<td>
+                      <a
+                        href={`https://aadhyaraj.onrender.com/${application.resume}`}
+                      >
+                      </a>
+                    </td>*/}
+                    {/* <td><span className={`badge ${application.status === 'pending' ? 'badge-inactive' : 'badge-active'}`}>{application.status || 'pending'}</span></td> */}
+                    <td>
+                      <select
+                        value={application.status || 'pending'}
+                        onChange={(e) =>
+                          updateApplicationStatus(application._id, e.target.value)
+                        }
+                        className="status-dropdown"
+                      >
+                        <option value="pending">Pending</option>
+                        <option value="reviewing">Reviewing</option>
+                        <option value="shortlisted">Shortlisted</option>
+                        <option value="interviewed">Interviewed</option>
+                        <option value="offered">Offered</option>
+                        <option value="hired">Hired</option>
+                        <option value="rejected">Rejected</option>
+                      </select>
+                    </td>
                     <td>{formatDate(application.createdAt)}</td>
                   </tr>
                 ))}

@@ -86,6 +86,33 @@
 .btn-confirm-delete { background: linear-gradient(135deg, #ef4444, #dc2626); border: none; color: #fff; padding: 0.7rem 1.6rem; border-radius: 10px; cursor: pointer; font-weight: 700; font-size: 0.9rem; transition: all 0.2s; }
 .btn-confirm-delete:hover { box-shadow: 0 6px 18px rgba(239,68,68,0.3); }
 
+.status-dropdown {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  background: white;
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+}
+
+.status-dropdown:focus {
+  border-color: #0F3460;
+}
+
+.resume-link {
+  background: #0F3460;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 14px;
+  display: inline-block;
+}
+
+.resume-link:hover {
+  opacity: 0.9;
+}
 /* Loading / error */
 .cms-loading { text-align: center; padding: 4rem; color: var(--text-muted); font-size: 1rem; }
 .cms-error { text-align: center; padding: 4rem; color: #dc2626; }
