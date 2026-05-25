@@ -11,7 +11,7 @@ const JobDetail = () => {
 
   const [job, setJob] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [application, setApplication] = useState({ name: '', email: '', phone: '', message: '',experience: '0-1 years' });
+  const [application, setApplication] = useState({ name: '', email: '', phone: '', message: '',experience: '0-1 years',skills: '' });
   const [resume, setResume] = useState(null);
   const [submitting, setSubmitting] = useState(false);
 
@@ -51,6 +51,7 @@ const JobDetail = () => {
     formData.append('phone', application.phone);
     formData.append('coverLetter', application.message);
     formData.append('experience', application.experience);
+    formData.append('skills', application.skills);
     formData.append('resume', resume);
 
     try {
@@ -168,7 +169,7 @@ const JobDetail = () => {
             )}
 
             {/* Skills */}
-            {job.skills && job.skills.length > 0 && (
+            {/* {job.skills && job.skills.length > 0 && (
               <div className="jd-section">
                 <h2 className="jd-section-title">Skills &amp; Technologies</h2>
                 <div className="jd-skills">
@@ -177,7 +178,7 @@ const JobDetail = () => {
                   ))}
                 </div>
               </div>
-            )}
+            )} */}
           </motion.aside>
 
           {/* Right – Application Form */}
@@ -246,6 +247,20 @@ const JobDetail = () => {
                   <option value="8+ years">8+ years</option>
                 </select>
               </label>
+                {job.title === 'Open Application – Domain Based Hiring' && (
+                  <label className="jd-label">
+                    Your Skills<span>*</span>
+
+                    <input
+                      type="text"
+                      name="skills"
+                      value={application.skills || ''}
+                      onChange={handleChange}
+                      placeholder="Frontend, React, Java, AI, UI/UX..."
+                      required
+                    />
+                  </label>
+                )}
                 <label className="jd-label">
                   Resume<span>*</span>
                   <input

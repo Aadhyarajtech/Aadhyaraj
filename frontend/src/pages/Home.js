@@ -119,8 +119,8 @@ const Home = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <span className="hero-title-line">Complete IT</span>
-            <span className="hero-title-line">Solutions</span>
+            <span className="hero-title-line">Complete IT Solutions</span>
+            {/* <span className="hero-title-line">Solutions</span> */}
             <span className="hero-title-line italic">Under One Roof</span>
           </motion.h1>
           <motion.p

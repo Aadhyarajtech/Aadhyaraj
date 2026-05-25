@@ -196,21 +196,21 @@ const Contact = () => {
                 <h3>Direct Contact</h3>
                 <div className="direct-contacts">
                   <div className="direct-item">
-                    📧 Email :  
+                    📧 Email:  
                     <a href="mailto:info@aadhyarajtech.com">
                       &nbsp;info@aadhyarajtech.com
                     </a>
                   </div>
 
                   <div className="direct-item">
-                    📞 Phone : 
+                    📞 Phone: 
                     <a href="tel:+919127912345">
                        &nbsp;+91 91279 12345
                     </a>
                   </div>
 
                   <div className="direct-item">
-                    ⏰ Response Time : 
+                    ⏰ Response Time: 
                     <span> Within 24 business hours</span>
                   </div>
                 </div>
