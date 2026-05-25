@@ -324,7 +324,7 @@ const About = () => {
                 <div className="testimonial-stars">
                   {'★'.repeat(t.rating || 5)}
                 </div>
-                <div className="testimonial-quote-mark">"</div>
+                {/* <div className="testimonial-quote-mark">"</div> */}
                 <p className="testimonial-text-new">"{t.message}"</p>
                 <div className="testimonial-author-new">
                   <div className="testimonial-company-icon">{t.icon || '🏢'}</div>
