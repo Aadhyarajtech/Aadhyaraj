@@ -1,6 +1,6 @@
 const Contact = require('../models/Contact');
 const { sendSuccess, sendError } = require('../utils/response');
-
+const transporter = require('../config/mailer');
 // @desc Submit contact form
 // @route POST /api/contact
 exports.submitContact = async (req, res) => {
@@ -16,7 +16,63 @@ exports.submitContact = async (req, res) => {
       service
     });
 
-    sendSuccess(res, 'Thank you! Your message has been received. We will get back to you shortly.', contact, 201);
+    // Email to Company
+    await transporter.sendMail({
+      from: process.env.EMAIL_USER,
+      to: 'contact@aadhyarajtech.com',
+      subject: 'New Contact Form Submission',
+      html: `
+        <h2>New Contact Form Submission</h2>
+
+        <p><b>Name:</b> ${name}</p>
+        <p><b>Email:</b> ${email}</p>
+        <p><b>Phone:</b> ${phone || 'N/A'}</p>
+        <p><b>Service:</b> ${service || 'N/A'}</p>
+        <p><b>Subject:</b> ${subject || 'N/A'}</p>
+
+        <p><b>Message:</b></p>
+        <p>${message}</p>
+      `
+    });
+
+    // Confirmation Email to Customer
+    await transporter.sendMail({
+      from: process.env.EMAIL_USER,
+      to: email,
+      subject: 'We Received Your Message',
+      html: `
+        <h2>Thank You for Contacting Us</h2>
+
+        <p>Dear ${name},</p>
+
+        <p>
+          We have successfully received your message.
+        </p>
+
+        <p>
+          Our team will review your inquiry and get back to you as soon as possible.
+        </p>
+
+        <p>
+          Thank you for choosing AadhyaRaj Technologies.
+        </p>
+
+        <br/>
+
+        <p>
+          Regards,<br/>
+          AadhyaRaj Technologies
+        </p>
+      `
+    });
+
+    sendSuccess(
+      res,
+      'Thank you! Your message has been received. We will get back to you shortly.',
+      contact,
+      201
+    );
+
   } catch (error) {
     console.error('Submit contact error:', error);
     sendError(res, 'Server error. Please try again.', 500);

@@ -37,7 +37,7 @@ const AdminDashboard = () => {
       } finally { setLoading(false); }
     };
     fetchDashboard();
-  }, [navigate]);
+  }, [navigate,logout]);
 
   const allCmsCards = [
     { title: 'Services', icon: '🚀', desc: 'Manage service offerings', count: stats?.totalServices ?? '—', path: '/admin/services', color: '#3b82f6', roles: ['superadmin'] },

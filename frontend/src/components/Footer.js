@@ -45,9 +45,9 @@ const Footer = () => {
               <a href="https://www.linkedin.com/company/aadhyaraj-technologies/"
                   target="_blank"
                   rel="noopener noreferrer" aria-label="LinkedIn" className="social-btn">in</a>
-              <a href="#" aria-label="Twitter" className="social-btn">𝕏</a>
-              <a href="#" aria-label="Facebook" className="social-btn">f</a>
-              <a href="#" aria-label="Instagram" className="social-btn">ig</a>
+              <a href="/" aria-label="Twitter" className="social-btn">𝕏</a>
+              <a href="/" aria-label="Facebook" className="social-btn">f</a>
+              <a href="/" aria-label="Instagram" className="social-btn">ig</a>
             </div>
           </div>
 
@@ -93,11 +93,11 @@ const Footer = () => {
           <div className="footer-bottom-content">
             <p>&copy; {year} AadhyaRaj Technologies. All rights reserved.</p>
             <div className="footer-bottom-links">
-              <a href="#">Privacy Policy</a>
+              <a href="/">Privacy Policy</a>
               <span>|</span>
-              <a href="#">Terms of Service</a>
+              <a href="/">Terms of Service</a>
               <span>|</span>
-              <a href="#">Sitemap</a>
+              <a href="/">Sitemap</a>
             </div>
           </div>
         </div>
