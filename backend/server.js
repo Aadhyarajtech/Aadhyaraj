@@ -27,10 +27,7 @@ app.use('/api/', limiter);
 //   credentials: true
 // }));
 app.use(cors({
-  origin: [
-    'http://localhost:3000',
-    'https://aadhyaraj.vercel.app'
-  ],
+  origin: process.env.CLIENT_URL,
   credentials: true
 }));
 
