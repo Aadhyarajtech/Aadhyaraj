@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from '../api';
 import { toast } from 'react-toastify';
@@ -17,12 +17,12 @@ const AdminDashboard = () => {
   const isSuperAdmin = admin?.role === 'superadmin';
   const isCareerAdmin = admin?.role === 'careeradmin';
 
-  const logout = () => {
+  const logout = useCallback(() => {
     localStorage.removeItem('aadhyaraj_token');
     localStorage.removeItem('aadhyaraj_admin');
     toast.info('Logged out successfully.');
     navigate('/admin');
-  };
+  }, [navigate]);
 
   useEffect(() => {
     const token = localStorage.getItem('aadhyaraj_token');
