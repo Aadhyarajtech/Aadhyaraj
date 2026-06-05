@@ -2,6 +2,7 @@ const Career = require('../models/Career');
 const JobApplication = require('../models/JobApplication');
 const { sendSuccess, sendError } = require('../utils/response');
 const resend = require('../config/resend');
+const axios = require('axios');
 
 // @desc Get all active careers
 // @route GET /api/careers
@@ -119,42 +120,38 @@ exports.submitApplication = async (req, res) => {
     };
 
     const application = await JobApplication.create(applicationData);
-    const downloadUrl = application.resume.replace(
-  '/upload/',
-  '/upload/fl_attachment/'
-);
+    console.log("Downloading resume from:", application.resume);
+const resumeResponse = await axios.get(application.resume, {
+  responseType: 'arraybuffer'
+});
+console.log("Resume downloaded successfully. Size:", resumeResponse.data.length);
 
-    // Email to TAG
+const resumeBuffer = Buffer.from(resumeResponse.data);
 
 await resend.emails.send({
   from: 'onboarding@resend.dev',
   to: ['info@aadhyarajtech.com'],
   subject: 'Website Application',
+
   html: `
-<h2>New Job Application</h2>
+    <h2>New Job Application</h2>
 
-<p><b>Name:</b> ${application.applicantName}</p>
+    <p><b>Name:</b> ${application.applicantName}</p>
+    <p><b>Email:</b> ${application.email}</p>
+    <p><b>Phone:</b> ${application.phone || 'N/A'}</p>
+    <p><b>Experience:</b> ${application.experience}</p>
+    <p><b>Position:</b> ${career.title}</p>
 
-<p><b>Email:</b> ${application.email}</p>
+    <p><b>Cover Note:</b></p>
+    <p>${application.coverLetter || 'N/A'}</p>
+  `,
 
-<p><b>Phone:</b> ${application.phone || 'N/A'}</p>
-
-<p><b>Experience:</b> ${application.experience}</p>
-
-<p><b>Position:</b> ${career.title}</p>
-
-<p><b>Cover Note:</b></p>
-<p>${application.coverLetter || 'N/A'}</p>
-
-<hr>
-
-<p>
-  <b>Resume:</b>
-  <a href="${downloadUrl}" target="_blank">
-    Download Resume
-  </a>
-</p>
-`
+  attachments: [
+  {
+    filename: req.file.originalname || 'Resume.pdf',
+    content: resumeBuffer.toString('base64')
+  }
+]
 });
 
 
