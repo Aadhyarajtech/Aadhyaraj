@@ -27,6 +27,8 @@ exports.submitContact = async (req, res) => {
     <p><b>Name:</b> ${name}</p>
     <p><b>Email:</b> ${email}</p>
     <p><b>Phone:</b> ${phone}</p>
+    <p><b>Service:</b> ${service || 'N/A'}</p>
+    <p><b>Subject:</b> ${subject || 'N/A'}</p>
     <p><b>Message:</b> ${message}</p>
   `
 });

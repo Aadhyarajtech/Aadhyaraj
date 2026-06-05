@@ -4,19 +4,18 @@ const { CloudinaryStorage } = require('multer-storage-cloudinary');
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
+  api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
 const storage = new CloudinaryStorage({
-  cloudinary: cloudinary,
+  cloudinary,
   params: {
-    folder: 'aadhyaraj-technologies',
-    allowed_formats: ['jpg', 'png', 'jpeg', 'gif', 'webp', 'pdf'],
-    transformation: [{ width: 1000, height: 1000, crop: 'limit' }],
-  },
+    folder: 'resumes',
+    resource_type: 'raw'
+  }
 });
 
 module.exports = {
   cloudinary,
-  storage,
+  storage
 };
