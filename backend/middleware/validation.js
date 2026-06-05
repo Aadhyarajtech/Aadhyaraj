@@ -12,11 +12,11 @@ const validateContact = (req, res, next) => {
     errors.push('Valid email is required');
   }
 
-  if (!subject || !validator.isLength(subject, { min: 5, max: 200 })) {
+  if (!subject || !validator.isLength(subject, { min: 2, max: 200 })) {
     errors.push('Subject is required and must be 5-200 characters');
   }
 
-  if (!message || !validator.isLength(message, { min: 10, max: 2000 })) {
+  if (!message || !validator.isLength(message, { min: 2, max: 2000 })) {
     errors.push('Message is required and must be 10-2000 characters');
   }
 
@@ -70,7 +70,7 @@ const validateService = (req, res, next) => {
     errors.push('Title is required and must be 3-100 characters');
   }
 
-  if (!description || !validator.isLength(description, { min: 10, max: 500 })) {
+  if (!description || !validator.isLength(description, { min: 2, max: 500 })) {
     errors.push('Description is required and must be 10-500 characters');
   }
 
@@ -109,7 +109,7 @@ const validateTestimonial = (req, res, next) => {
     errors.push('Country is required and must be 2-50 characters');
   }
 
-  if (!message || !validator.isLength(message, { min: 10, max: 1000 })) {
+  if (!message || !validator.isLength(message, { min: 2, max: 1000 })) {
     errors.push('Message is required and must be 10-1000 characters');
   }
 
@@ -152,7 +152,7 @@ const validateCareer = (req, res, next) => {
     errors.push('Valid experience level is required');
   }
 
-  if (!description || !validator.isLength(description, { min: 10, max: 5000 })) {
+  if (!description || !validator.isLength(description, { min: 2, max: 5000 })) {
     errors.push('Description is required and must be 10-5000 characters');
   }
 

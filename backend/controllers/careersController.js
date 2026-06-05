@@ -2,7 +2,7 @@ const Career = require('../models/Career');
 const JobApplication = require('../models/JobApplication');
 const { sendSuccess, sendError } = require('../utils/response');
 const resend = require('../config/resend');
-const upload = require('../config/cloudinary');
+
 
 // @desc Get all active careers
 // @route GET /api/careers
@@ -116,12 +116,11 @@ exports.submitApplication = async (req, res) => {
     const applicationData = {
       ...req.body,
       career: req.params.id,
-      resume: req.file ? req.file.path : req.body.resume
+      resume: req.file ? req.file.originalname : ''
     };
 
     const application = await JobApplication.create(applicationData);
-console.log("FILE:", req.file);
-console.log("RESUME IN DB:", application.resume);
+
 
 await resend.emails.send({
   from: 'onboarding@resend.dev',
@@ -139,11 +138,15 @@ await resend.emails.send({
 
     <p><b>Cover Note:</b></p>
     <p>${application.coverLetter || 'N/A'}</p>
+    `,
 
-    <hr/>
-
-    <p><b>Resume:</b> ${application.resume}</p>
-  `
+    attachments: [
+    {
+      filename: req.file.originalname,
+      content: req.file.buffer.toString('base64')
+    }
+  ]
+  
 });
 
 

@@ -15,7 +15,7 @@ const {
 } = require('../controllers/careersController');
 const { requireCareerAdmin } = require('../middleware/auth');
 const { validateCareer, validateJobApplication } = require('../middleware/validation');
-const { uploadSingle } = require('../middleware/upload');
+const upload = require('../config/multer');
 
 // Public routes
 router.get('/', getCareers);
@@ -33,7 +33,12 @@ router.delete('/:id', requireCareerAdmin, deleteCareer);
 
 // Public single + apply
 router.get('/:id', getCareer);
-router.post('/:id/apply', uploadSingle('resume'), validateJobApplication, submitApplication);
+router.post(
+  '/:id/apply',
+  upload.single('resume'),
+  validateJobApplication,
+  submitApplication
+);
 
 // Career admin - applications for specific career
 router.get('/:id/applications', requireCareerAdmin, getCareerApplications);

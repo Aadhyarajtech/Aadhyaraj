@@ -64,7 +64,7 @@ const jobApplicationSchema = new mongoose.Schema({
   },
   resume: {
     type: String,
-    required: [true, 'Resume is required']
+    
   },
   portfolio: {
     type: String,
