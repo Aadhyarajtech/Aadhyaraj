@@ -10,8 +10,9 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary,
   params: {
-    folder: 'resumes',
-    resource_type: 'raw'
+    folder: 'aadhyaraj-technologies',
+    resource_type: 'raw',
+    format: 'pdf'
   }
 });
 

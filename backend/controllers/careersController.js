@@ -135,9 +135,14 @@ await resend.emails.send({
     <p><b>Experience:</b> ${application.experience}</p>
     <p><b>Position:</b> ${career.title}</p>
     <p><b>Cover Note:</b></p>
-    <p>${application.coverLetter || 'N/A'}</p>
+    <p>${application.coverLetter}</p>
 
-    <p><b>Resume:</b> ${application.resume}</p>
+    <p>
+  <b>Resume:</b>
+  <a href="${application.resume}" target="_blank">
+    View Resume
+  </a>
+</p>
   `
 });
 
