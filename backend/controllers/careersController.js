@@ -1,7 +1,7 @@
 const Career = require('../models/Career');
 const JobApplication = require('../models/JobApplication');
 const { sendSuccess, sendError } = require('../utils/response');
-const transporter = require('../config/mailer');
+const resend = require('../config/resend');
 
 // @desc Get all active careers
 // @route GET /api/careers
@@ -121,62 +121,62 @@ exports.submitApplication = async (req, res) => {
     const application = await JobApplication.create(applicationData);
 
     // Email to TAG
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: 'tag@aadhyarajtech.com',
-      subject: 'Website Application',
-      html: `
-        <h2>New Job Application</h2>
+    console.log('Trying to send Resend email...');
 
-        <p><b>Name:</b> ${application.applicantName}</p>
-        <p><b>Email:</b> ${application.email}</p>
-        <p><b>Phone:</b> ${application.phone || 'N/A'}</p>
-        <p><b>Experience:</b> ${application.experience}</p>
-        <p><b>Position:</b> ${career.title}</p>
-        <p><b>Cover Note:</b> ${application.coverLetter || 'N/A'}</p>
+const result = await resend.emails.send({
+  from: 'onboarding@resend.dev',
+  to: ['dsreeshanth48@gmail.com'],
+  subject: 'Career Application Test',
+  html: `
+    <h2>Career Application Received</h2>
 
-        <p><b>Resume:</b> ${application.resume}</p>
-      `
-    });
+    <p><b>Name:</b> ${application.applicantName}</p>
+    <p><b>Email:</b> ${application.email}</p>
+    <p><b>Experience:</b> ${application.experience}</p>
+  `
+});
+
+console.log('Resend result:', result);
 
     // Confirmation Email to Applicant
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: application.email,
-      subject: 'Application Submitted Successfully',
-      html: `
-        <h2>Thank You for Applying</h2>
+    // await transporter.sendMail({
+    //   from: process.env.EMAIL_USER,
+    //   to: application.email,
+    //   subject: 'Application Submitted Successfully',
+    //   html: `
+    //     <h2>Thank You for Applying</h2>
 
-        <p>Dear ${application.applicantName},</p>
+    //     <p>Dear ${application.applicantName},</p>
 
-        <p>
-          We have successfully received your application for
-          <b>${career.title}</b>.
-        </p>
+    //     <p>
+    //       We have successfully received your application for
+    //       <b>${career.title}</b>.
+    //     </p>
 
-        <p>
-          Our recruitment team will review your profile and
-          reach out to you shortly if your qualifications match
-          our requirements.
-        </p>
+    //     <p>
+    //       Our recruitment team will review your profile and
+    //       reach out to you shortly if your qualifications match
+    //       our requirements.
+    //     </p>
 
-        <p>
-          Thank you for your interest in AadhyaRaj Technologies.
-        </p>
+    //     <p>
+    //       Thank you for your interest in AadhyaRaj Technologies.
+    //     </p>
 
-        <br/>
+    //     <br/>
 
-        <p>
-          Regards,<br/>
-          AadhyaRaj Technologies
-        </p>
-      `
-    });
+    //     <p>
+    //       Regards,<br/>
+    //       AadhyaRaj Technologies
+    //     </p>
+    //   `
+    // });
 
     sendSuccess(res, 'Application submitted successfully', application, 201);
 
   } catch (error) {
     console.error('Submit application error:', error);
+    console.error(JSON.stringify(error, null, 2));
     sendError(res, 'Failed to submit application', 500);
   }
 };

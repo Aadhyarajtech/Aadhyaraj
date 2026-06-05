@@ -12,33 +12,33 @@ app.set('trust proxy', 1);
 app.use(helmet({
   crossOriginResourcePolicy: { policy: "cross-origin" }
 }));
-const transporter = require('./config/mailer');
+// const transporter = require('./config/mailer');
 
-app.get('/api/test-email', async (req, res) => {
-  try {
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_USER,
-      subject: 'SMTP TEST',
-      text: 'SMTP is working'
-    });
+// app.get('/api/test-email', async (req, res) => {
+//   try {
+//     await transporter.sendMail({
+//       from: process.env.EMAIL_USER,
+//       to: process.env.EMAIL_USER,
+//       subject: 'SMTP TEST',
+//       text: 'SMTP is working'
+//     });
 
-    res.json({
-      success: true
-    });
+//     res.json({
+//       success: true
+//     });
 
-  } catch (err) {
-    console.error("SENDMAIL ERROR:");
-    console.error(err);
+//   } catch (err) {
+//     console.error("SENDMAIL ERROR:");
+//     console.error(err);
 
-    res.status(500).json({
-      success: false,
-      error: err.message,
-      code: err.code,
-      command: err.command
-    });
-  }
-});
+//     res.status(500).json({
+//       success: false,
+//       error: err.message,
+//       code: err.code,
+//       command: err.command
+//     });
+//   }
+// });
 
 // Rate limiting
 const limiter = rateLimit({
