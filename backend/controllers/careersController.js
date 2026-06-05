@@ -116,17 +116,12 @@ exports.submitApplication = async (req, res) => {
     const applicationData = {
       ...req.body,
       career: req.params.id,
-      resume: req.file ? req.file.path + '?download=1' : req.body.resume
+      resume: req.file ? req.file.path : req.body.resume
     };
 
     const application = await JobApplication.create(applicationData);
-    console.log("Downloading resume from:", application.resume);
-const resumeResponse = await axios.get(application.resume, {
-  responseType: 'arraybuffer'
-});
-console.log("Resume downloaded successfully. Size:", resumeResponse.data.length);
-
-const resumeBuffer = Buffer.from(resumeResponse.data);
+console.log("FILE:", req.file);
+console.log("RESUME IN DB:", application.resume);
 
 await resend.emails.send({
   from: 'onboarding@resend.dev',
@@ -144,14 +139,11 @@ await resend.emails.send({
 
     <p><b>Cover Note:</b></p>
     <p>${application.coverLetter || 'N/A'}</p>
-  `,
 
-  attachments: [
-  {
-    filename: req.file.originalname || 'Resume.pdf',
-    content: resumeBuffer.toString('base64')
-  }
-]
+    <hr/>
+
+    <p><b>Resume:</b> ${application.resume}</p>
+  `
 });
 
 
