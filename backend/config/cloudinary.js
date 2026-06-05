@@ -11,8 +11,7 @@ const storage = new CloudinaryStorage({
   cloudinary,
   params: {
     folder: 'aadhyaraj-technologies',
-    resource_type: 'raw',
-    format: 'pdf'
+    resource_type: 'auto'
   }
 });
 
