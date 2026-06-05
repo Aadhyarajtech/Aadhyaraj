@@ -125,7 +125,7 @@ exports.submitApplication = async (req, res) => {
 
 const result = await resend.emails.send({
   from: 'onboarding@resend.dev',
-  to: ['dsreeshanth48@gmail.com'],
+  to: ['info@aadhyarajtech.com'],
   subject: 'Career Application Test',
   html: `
     <h2>Career Application Received</h2>
