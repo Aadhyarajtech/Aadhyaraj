@@ -1,6 +1,6 @@
 const Contact = require('../models/Contact');
 const { sendSuccess, sendError } = require('../utils/response');
-const transporter = require('../config/mailer');
+const resend = require('../config/resend');
 // @desc Submit contact form
 // @route POST /api/contact
 exports.submitContact = async (req, res) => {
@@ -34,37 +34,19 @@ exports.submitContact = async (req, res) => {
         <p>${message}</p>
       `
     });
-
+console.log('Contact form submitted');
     // Confirmation Email to Customer
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: email,
-      subject: 'We Received Your Message',
-      html: `
-        <h2>Thank You for Contacting Us</h2>
-
-        <p>Dear ${name},</p>
-
-        <p>
-          We have successfully received your message.
-        </p>
-
-        <p>
-          Our team will review your inquiry and get back to you as soon as possible.
-        </p>
-
-        <p>
-          Thank you for choosing AadhyaRaj Technologies.
-        </p>
-
-        <br/>
-
-        <p>
-          Regards,<br/>
-          AadhyaRaj Technologies
-        </p>
-      `
-    });
+    await resend.emails.send({
+  from: 'onboarding@resend.dev',
+  to: ['dsreeshanth48@gmail.com'],
+  subject: 'Resend Test',
+  html: `
+    <h2>Resend is working!</h2>
+    <p>Name: ${name}</p>
+    <p>Email: ${email}</p>
+  `
+});
+console.log('Resend email sent');
 
     sendSuccess(
       res,

@@ -51,7 +51,7 @@ const JobDetail = () => {
     formData.append('phone', application.phone);
     formData.append('coverLetter', application.message);
     formData.append('experience', application.experience);
-    formData.append('skills', application.skills);
+    formData.append('skills', JSON.stringify(application.skills.split(',')));
     formData.append('resume', resume);
 
     try {
