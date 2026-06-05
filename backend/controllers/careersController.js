@@ -2,7 +2,7 @@ const Career = require('../models/Career');
 const JobApplication = require('../models/JobApplication');
 const { sendSuccess, sendError } = require('../utils/response');
 const resend = require('../config/resend');
-const axios = require('axios');
+const upload = require('../config/cloudinary');
 
 // @desc Get all active careers
 // @route GET /api/careers
