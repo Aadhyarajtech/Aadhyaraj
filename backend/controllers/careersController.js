@@ -119,7 +119,10 @@ exports.submitApplication = async (req, res) => {
     };
 
     const application = await JobApplication.create(applicationData);
-
+    const downloadUrl = application.resume.replace(
+  '/upload/',
+  '/upload/fl_attachment/'
+);
 
     // Email to TAG
 
@@ -147,9 +150,9 @@ await resend.emails.send({
 
 <p>
   <b>Resume:</b>
-  <a href="${application.resume}" target="_blank" rel="noopener noreferrer">
-  Download Resume
-</a>
+  <a href="${downloadUrl}" target="_blank">
+    Download Resume
+  </a>
 </p>
 `
 });
