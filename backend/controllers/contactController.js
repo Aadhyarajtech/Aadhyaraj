@@ -17,36 +17,50 @@ exports.submitContact = async (req, res) => {
     });
 
     // Email to Company
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: 'contact@aadhyarajtech.com',
-      subject: 'New Contact Form Submission',
-      html: `
-        <h2>New Contact Form Submission</h2>
-
-        <p><b>Name:</b> ${name}</p>
-        <p><b>Email:</b> ${email}</p>
-        <p><b>Phone:</b> ${phone || 'N/A'}</p>
-        <p><b>Service:</b> ${service || 'N/A'}</p>
-        <p><b>Subject:</b> ${subject || 'N/A'}</p>
-
-        <p><b>Message:</b></p>
-        <p>${message}</p>
-      `
-    });
-console.log('Contact form submitted');
-    // Confirmation Email to Customer
     await resend.emails.send({
   from: 'onboarding@resend.dev',
-  to: ['dsreeshanth48@gmail.com'],
-  subject: 'Resend Test',
+  to: ['info@aadhyarajtech.com'],
+  subject: 'New Contact Form Submission',
   html: `
-    <h2>Resend is working!</h2>
-    <p>Name: ${name}</p>
-    <p>Email: ${email}</p>
+    <h2>New Contact Form Submission</h2>
+
+    <p><b>Name:</b> ${name}</p>
+    <p><b>Email:</b> ${email}</p>
+    <p><b>Phone:</b> ${phone}</p>
+    <p><b>Message:</b> ${message}</p>
   `
 });
-console.log('Resend email sent');
+
+    // Confirmation Email to Customer
+    // await transporter.sendMail({
+    //   from: process.env.EMAIL_USER,
+    //   to: email,
+    //   subject: 'We Received Your Message',
+    //   html: `
+    //     <h2>Thank You for Contacting Us</h2>
+
+    //     <p>Dear ${name},</p>
+
+    //     <p>
+    //       We have successfully received your message.
+    //     </p>
+
+    //     <p>
+    //       Our team will review your inquiry and get back to you as soon as possible.
+    //     </p>
+
+    //     <p>
+    //       Thank you for choosing AadhyaRaj Technologies.
+    //     </p>
+
+    //     <br/>
+
+    //     <p>
+    //       Regards,<br/>
+    //       AadhyaRaj Technologies
+    //     </p>
+    //   `
+    // });
 
     sendSuccess(
       res,

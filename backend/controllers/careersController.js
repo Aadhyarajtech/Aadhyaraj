@@ -121,22 +121,24 @@ exports.submitApplication = async (req, res) => {
     const application = await JobApplication.create(applicationData);
 
     // Email to TAG
-    console.log('Trying to send Resend email...');
 
-const result = await resend.emails.send({
+await resend.emails.send({
   from: 'onboarding@resend.dev',
   to: ['info@aadhyarajtech.com'],
-  subject: 'Career Application Test',
+  subject: 'Website Application',
   html: `
-    <h2>Career Application Received</h2>
+    <h2>New Job Application</h2>
 
     <p><b>Name:</b> ${application.applicantName}</p>
     <p><b>Email:</b> ${application.email}</p>
+    <p><b>Phone:</b> ${application.phone || 'N/A'}</p>
     <p><b>Experience:</b> ${application.experience}</p>
+    <p><b>Position:</b> ${career.title}</p>
+
+    <p><b>Resume:</b> ${application.resume}</p>
   `
 });
 
-console.log('Resend result:', result);
 
     // Confirmation Email to Applicant
     // await transporter.sendMail({
