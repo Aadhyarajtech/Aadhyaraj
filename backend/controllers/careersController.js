@@ -115,12 +115,11 @@ exports.submitApplication = async (req, res) => {
     const applicationData = {
       ...req.body,
       career: req.params.id,
-      resume: req.file ? req.file.path : req.body.resume
+      resume: req.file ? req.file.path + '?download=1' : req.body.resume
     };
 
     const application = await JobApplication.create(applicationData);
-    console.log("Resume URL:", application.resume);
-console.log("File Object:", req.file);
+
 
     // Email to TAG
 
@@ -129,23 +128,30 @@ await resend.emails.send({
   to: ['info@aadhyarajtech.com'],
   subject: 'Website Application',
   html: `
-    <h2>New Job Application</h2>
+<h2>New Job Application</h2>
 
-    <p><b>Name:</b> ${application.applicantName}</p>
-    <p><b>Email:</b> ${application.email}</p>
-    <p><b>Phone:</b> ${application.phone || 'N/A'}</p>
-    <p><b>Experience:</b> ${application.experience}</p>
-    <p><b>Position:</b> ${career.title}</p>
-    <p><b>Cover Note:</b></p>
-    <p>${application.coverLetter}</p>
+<p><b>Name:</b> ${application.applicantName}</p>
 
-    <p>
+<p><b>Email:</b> ${application.email}</p>
+
+<p><b>Phone:</b> ${application.phone || 'N/A'}</p>
+
+<p><b>Experience:</b> ${application.experience}</p>
+
+<p><b>Position:</b> ${career.title}</p>
+
+<p><b>Cover Note:</b></p>
+<p>${application.coverLetter || 'N/A'}</p>
+
+<hr>
+
+<p>
   <b>Resume:</b>
-  <a href="${application.resume}?download=1" target="_blank">
+  <a href="${application.resume}" target="_blank" rel="noopener noreferrer">
   Download Resume
 </a>
 </p>
-  `
+`
 });
 
 
