@@ -18,8 +18,8 @@ exports.submitContact = async (req, res) => {
 
     // Email to Company
     await resend.emails.send({
-  from: 'onboarding@resend.dev',
-  to: ['info@aadhyarajtech.com'],
+  from: 'info@aadhyarajtech.com',
+  to: ['contact@aadhyarajtech.com'],
   subject: 'New Contact Form Submission',
   html: `
     <h2>New Contact Form Submission</h2>
@@ -33,6 +33,36 @@ exports.submitContact = async (req, res) => {
   `
 });
 
+await resend.emails.send({
+  from: 'info@aadhyarajtech.com',
+  to: [email],
+  subject: 'We Received Your Message',
+
+  html: `
+    <h2>Thank You for Contacting AadhyaRaj Technologies</h2>
+
+    <p>Dear ${name},</p>
+
+    <p>
+      We have successfully received your inquiry.
+    </p>
+
+    <p>
+      Our team will review your message and get back to you as soon as possible.
+    </p>
+
+    <p>
+      Thank you for choosing AadhyaRaj Technologies.
+    </p>
+
+    <br/>
+
+    <p>
+      Regards,<br/>
+      AadhyaRaj Technologies
+    </p>
+  `
+});
     // Confirmation Email to Customer
     // await transporter.sendMail({
     //   from: process.env.EMAIL_USER,

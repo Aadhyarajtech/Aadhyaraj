@@ -123,8 +123,8 @@ exports.submitApplication = async (req, res) => {
 
 
 await resend.emails.send({
-  from: 'onboarding@resend.dev',
-  to: ['info@aadhyarajtech.com'],
+  from: 'info@aadhyarajtech.com',
+  to: ['tag@aadhyarajtech.com'],
   subject: 'Website Application',
 
   html: `
@@ -150,6 +150,37 @@ await resend.emails.send({
 });
 
 
+await resend.emails.send({
+  from: 'info@aadhyarajtech.com',
+  to: [application.email],
+  subject: 'Application Submitted Successfully',
+
+  html: `
+    <h2>Thank You for Applying</h2>
+
+    <p>Dear ${application.applicantName},</p>
+
+    <p>
+      We have successfully received your application for the position of
+      <b>${career.title}</b>.
+    </p>
+
+    <p>
+      Our recruitment team will review your profile and reach out to you shortly if your qualifications match our requirements.
+    </p>
+
+    <p>
+      Thank you for your interest in joining AadhyaRaj Technologies.
+    </p>
+
+    <br/>
+
+    <p>
+      Regards,<br/>
+      AadhyaRaj Technologies
+    </p>
+  `
+});
     // Confirmation Email to Applicant
     // await transporter.sendMail({
     //   from: process.env.EMAIL_USER,
