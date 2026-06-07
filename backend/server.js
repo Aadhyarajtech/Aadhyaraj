@@ -54,7 +54,10 @@ app.use('/api/', limiter);
 //   credentials: true
 // }));
 app.use(cors({
-  origin: process.env.CLIENT_URL,
+   origin: [
+    'https://aadhyarajtech.com',
+    'https://www.aadhyarajtech.com'
+  ],
   credentials: true
 }));
 
