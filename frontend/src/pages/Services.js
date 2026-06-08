@@ -178,7 +178,7 @@ const Services = () => {
               <h2>{activeService.title}</h2>
               <p className="detail-tagline">{activeService.tagline}</p>
               <div className="gold-line"></div>
-              <p className="detail-desc">{activeService.description}</p>
+              {/* <p className="detail-desc">{activeService.description}</p> */}
               <Link to="/contact" className="btn-primary" style={{ marginTop: '2rem', display: 'inline-flex' }}>
                 <span>Get a Quote</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
