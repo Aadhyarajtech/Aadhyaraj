@@ -3,6 +3,7 @@ import axios from '../api';
 import { Link } from 'react-router-dom';
 import './Footer.css';
 import logo from '../assets/logo1.png';
+import { FaInstagram } from "react-icons/fa";
 const Footer = () => {
   const [services, setServices] = useState([]);
 
@@ -47,7 +48,9 @@ const Footer = () => {
                   rel="noopener noreferrer" aria-label="LinkedIn" className="social-btn">in</a>
               <a href="/" aria-label="Twitter" className="social-btn">𝕏</a>
               <a href="/" aria-label="Facebook" className="social-btn">f</a>
-              <a href="/" aria-label="Instagram" className="social-btn">ig</a>
+              <a href="/" aria-label="Instagram" className="social-btn">
+                <FaInstagram />
+              </a>
             </div>
           </div>
 
