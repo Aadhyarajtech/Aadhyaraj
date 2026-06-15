@@ -59,7 +59,7 @@
 .nav-logo {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.35rem;
   text-decoration: none;
   /* margin-left: 90px; */
 }
