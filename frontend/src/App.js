@@ -48,7 +48,7 @@ function App() {
           <Route path="/admin/careers" element={<ProtectedRoute requireRole="careeradmin"><AdminCareers /></ProtectedRoute>} />
         </Routes>
         <Footer />
-        <Chatbot />
+        {false && <Chatbot />}
         <ToastContainer
           position="bottom-right"
           autoClose={4000}

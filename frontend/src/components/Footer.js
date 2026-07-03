@@ -96,11 +96,13 @@ const Footer = () => {
           <div className="footer-bottom-content">
             <p>&copy; {year} AadhyaRaj Technologies. All rights reserved.</p>
             <div className="footer-bottom-links">
-              <a href="/">Privacy Policy</a>
-              <span>|</span>
-              <a href="/">Terms of Service</a>
-              <span>|</span>
-              <a href="/">Sitemap</a>
+              <a href="/">Made with love by AadhyaRaj Technologies</a>
+                  <img
+                    src={logo}
+                    alt="AadhyaRaj Logo"
+                    className="footer-bottom-logo"
+                  />
+                  
             </div>
           </div>
         </div>

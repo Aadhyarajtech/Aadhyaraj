@@ -12,6 +12,24 @@
   width: 600px; height: 1px;
   background: linear-gradient(90deg, transparent, rgba(59,130,246,0.5), transparent);
 }
+.footer-bottom-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-bottom-links {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.footer-bottom-logo {
+  width: 42px;          /* adjust as needed */
+  height: 42px;
+  object-fit: contain;
+  border-radius: 8px;   /* optional */
+}
 
 .footer::before {
   content: '';
