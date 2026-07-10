@@ -25,10 +25,12 @@
 }
 
 .footer-bottom-logo {
-  width: 42px;          /* adjust as needed */
-  height: 42px;
+  width: 40px;          /* adjust as needed */
+  height: 40px;
   object-fit: contain;
-  border-radius: 8px;   /* optional */
+  border-radius: 8px; 
+  margin: 0;             /* Important */
+  padding: 0;     /* optional */
 }
 
 .footer::before {
@@ -155,7 +157,18 @@
   color: rgba(255,255,255,0.35);
 }
 
-.footer-bottom-links { display: flex; align-items: center; gap: 1rem; }
+.footer-bottom-links {
+  display: flex;
+  align-items: center;
+}
+
+.made-with {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;              /* Reduce this to 2px or 0 if you want */
+  text-decoration: none;
+  color: rgba(255,255,255,0.35);
+}
 
 .footer-bottom-links a {
   font-size: 0.8rem;

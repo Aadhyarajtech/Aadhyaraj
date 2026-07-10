@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from '../api';
 import { Link } from 'react-router-dom';
 import './Footer.css';
-import logo from '../assets/logo1.png';
+import logo3 from "../assets/logo3.png";
+// import logo from '../assets/logo1.png';
 import { FaInstagram } from "react-icons/fa";
 const Footer = () => {
   const [services, setServices] = useState([]);
@@ -32,7 +33,7 @@ const Footer = () => {
           <div className="footer-brand">
             <div className="footer-logo">
               <div className="footer-logo-icon">
-                <img src={logo} alt="Logo" className="footer-logo-image" />
+                <img src={logo3} alt="Logo" className="footer-logo-image" />
               </div>
               <div>
                 <div className="footer-logo-main">AadhyaRaj</div>
@@ -96,13 +97,19 @@ const Footer = () => {
           <div className="footer-bottom-content">
             <p>&copy; {year} AadhyaRaj Technologies. All rights reserved.</p>
             <div className="footer-bottom-links">
-              <a href="/">Made with love by AadhyaRaj Technologies</a>
+              <div className="footer-bottom-links">
+                <a href="/" className="made-with">
+                  <span>Made with love by</span>
+
                   <img
-                    src={logo}
+                    src={logo3}
                     alt="AadhyaRaj Logo"
                     className="footer-bottom-logo"
                   />
-                  
+
+                  <span>AadhyaRaj Technologies</span>
+                </a>
+              </div>   
             </div>
           </div>
         </div>
