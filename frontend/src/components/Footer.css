@@ -151,17 +151,20 @@
 
 .footer-bottom-content {
   display: flex;
+  color: rgba(255,255,255,0.6);
   align-items: center;
   justify-content: space-between;
+
 }
 
 .footer-bottom-content p {
   font-size: 0.8rem;
-  color: rgba(255,255,255,0.35);
+  color: rgba(255,255,255,0.6);
 }
 
 .footer-bottom-links {
   display: flex;
+  color: rgba(255,255,255,0.6);
   align-items: center;
 }
 
@@ -175,12 +178,12 @@
 
 .footer-bottom-links a {
   font-size: 0.8rem;
-  color: rgba(255,255,255,0.35);
+  color: rgba(255,255,255,0.6);
   transition: var(--transition);
 }
 
 .footer-bottom-links a:hover { color: #93c5fd; }
-.footer-bottom-links span { color: rgba(255,255,255,0.2); }
+.footer-bottom-links span { color: rgba(255,255,255,0.6); }
 
 @media (max-width: 1024px) {
   .footer-top { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
