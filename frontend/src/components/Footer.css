@@ -107,11 +107,35 @@
 
 .footer-col h4 {
   font-family: var(--font-heading);
-  font-size: 0.78rem; font-weight: 700;
-  letter-spacing: 0.2em; text-transform: uppercase;
-  color: #93c5fd;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #ffffff;              /* White by default */
   margin-bottom: 1.5rem;
-  position: relative; padding-bottom: 0.75rem;
+  position: relative;
+  padding-bottom: 0.75rem;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+.footer-col h4:hover {
+  color: #93c5fd;   /* Same blue color */
+}
+.footer-col h4::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 28px;
+  height: 2px;
+  background: #3b82f6;
+  border-radius: 1px;
+  transition: all 0.3s ease;
+}
+
+.footer-col h4:hover::after {
+  width: 40px;
+  background: #93c5fd;
 }
 
 .footer-col h4::after {
