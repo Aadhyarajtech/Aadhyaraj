@@ -184,6 +184,12 @@
 .footer-bottom-content p {
   font-size: 0.8rem;
   color: rgba(255,255,255,0.6);
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+.footer-bottom-content p:hover {
+  color: #93c5fd;
 }
 
 .footer-bottom-links {
@@ -200,14 +206,20 @@
   color: rgba(255,255,255,0.35);
 }
 
-.footer-bottom-links a {
+.footer-bottom-links a,
+.footer-bottom-links span {
   font-size: 0.8rem;
   color: rgba(255,255,255,0.6);
-  transition: var(--transition);
+  transition: color 0.3s ease;
+}
+.made-with:hover,
+.made-with:hover span,
+.made-with:hover img {
+  color: #93c5fd;
 }
 
-.footer-bottom-links a:hover { color: #93c5fd; }
-.footer-bottom-links span { color: rgba(255,255,255,0.6); }
+/* .footer-bottom-links a:hover { color: #93c5fd; }
+.footer-bottom-links span { color: rgba(255,255,255,0.6); } */
 
 @media (max-width: 1024px) {
   .footer-top { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
