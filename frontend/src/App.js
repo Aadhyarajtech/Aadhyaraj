@@ -22,6 +22,7 @@ import AdminContacts from './pages/AdminContacts';
 import ProtectedRoute from './components/ProtectedRoute';
 import './App.css';
 import ScrollToTop from './components/ScrollToTop';
+import FloatingWhatsApp from './components/FloatingWhatsApp';
 
 function App() {
   return (
@@ -49,6 +50,7 @@ function App() {
         </Routes>
         <Footer />
         {false && <Chatbot />}
+        <FloatingWhatsApp />
         <ToastContainer
           position="bottom-right"
           autoClose={4000}
