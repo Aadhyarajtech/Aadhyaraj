@@ -199,6 +199,9 @@ const Contact = () => {
                     <a href="tel:+919127912345">
                        &nbsp;+91 91279 12345
                     </a>
+                    <a href="tel:+919160867890">
+                       &nbsp;+91 91608 67890
+                    </a>
                   </div>
 
                   <div className="direct-item">
