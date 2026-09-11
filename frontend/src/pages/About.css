@@ -278,10 +278,10 @@
 
 /* GLOBAL */
 .global-section { padding: 6rem 0; background: #fff; }
-.global-inner { .global-inner {
+.global-inner {
   display: flex;
   justify-content: center;
-} }
+}
 .global-text {
   max-width: 1000px;
   margin: 0 auto;
@@ -341,4 +341,8 @@
   .global-offices { grid-template-columns: 1fr; }
   .testimonials-grid { grid-template-columns: 1fr; }
   .tech-categories-grid { grid-template-columns: 1fr; }
+
+  .timeline-item { grid-template-columns: 44px 12px minmax(0, 1fr); gap: 0 0.75rem; }
+  .timeline::before { left: 44px; }
+  .story-timeline { padding-left: 0; }
 }

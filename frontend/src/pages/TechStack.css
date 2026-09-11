@@ -12,3 +12,9 @@
 .tech-icon { font-size: 3rem; margin-bottom: 1rem; }
 .tech-card h3 { font-size: 1rem; font-weight: 600; color: var(--text-dark); }
 .tech-card p { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem; }
+
+@media (max-width: 767px) {
+	.tech-categories { padding: 3rem 0 4rem; gap: 3rem; }
+	.tech-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; }
+	.tech-card { padding: 1.5rem 1rem; }
+}

@@ -125,3 +125,12 @@
 @media (max-width: 540px) {
   .cms-table th:nth-child(2), .cms-table td:nth-child(2) { display: none; }
 }
+
+@media (max-width: 767px) {
+  .admin-cms-page { padding: 5rem 0 3rem; }
+  .admin-cms-page .container { padding: 0 1rem; }
+  .cms-stat { min-width: 0; flex: 1 1 120px; }
+  .cms-modal-overlay { padding: 1rem; }
+  .cms-modal { padding: 1.5rem; }
+  .form-actions { flex-wrap: wrap; }
+}

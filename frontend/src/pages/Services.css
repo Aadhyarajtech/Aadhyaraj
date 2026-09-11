@@ -98,4 +98,12 @@
   .process-steps { grid-template-columns: 1fr; }
   .service-tabs { gap: 0.4rem; }
   .tab-label { display: none; }
+
+  .service-detail-section,
+  .process-section { padding-left: 0; padding-right: 0; }
+
+  .detail-features,
+  .detail-techs { padding: 1.5rem; }
+
+  .detail-left h2 { font-size: 2rem; }
 }

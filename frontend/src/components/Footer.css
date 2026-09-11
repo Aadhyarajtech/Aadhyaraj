@@ -218,6 +218,20 @@
   color: #93c5fd;
 }
 
+@media (max-width: 767px) {
+  .footer { padding: 4rem 0 1.5rem; }
+
+  .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+
+  .footer-bottom-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .footer-bottom-links { flex-wrap: wrap; gap: 12px; }
+}
+
 /* .footer-bottom-links a:hover { color: #93c5fd; }
 .footer-bottom-links span { color: rgba(255,255,255,0.6); } */
 

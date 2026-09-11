@@ -20,3 +20,10 @@
 .no-testimonials { text-align: center; color: var(--text-muted); padding: 3rem; }
 .reveal { opacity: 0; transform: translateY(25px); transition: opacity 0.7s ease, transform 0.7s ease; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 767px) {
+	.testimonials-section { padding: 3rem 0 4rem; }
+	.testimonial-card { padding: 2rem 1.5rem; }
+	.testimonial-author { align-items: flex-start; flex-wrap: wrap; }
+	.stars { margin-left: 0; width: 100%; }
+}

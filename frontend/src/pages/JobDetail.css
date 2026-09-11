@@ -464,4 +464,7 @@
   .jd-form-card {
     padding: 1.5rem 1.25rem;
   }
+
+  .jd-container { padding: 0 1rem; }
+  .jd-body { padding: 36px 0 56px; }
 }

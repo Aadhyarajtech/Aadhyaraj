@@ -500,11 +500,19 @@
 @media (max-width: 768px) {
 
   .stats-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .stat-card { min-width: 0; padding: 2rem 0.5rem; }
 
   .services-grid {
     grid-template-columns: 1fr;
+  }
+
+  .services-grid .service-card,
+  .services-grid .service-card:nth-child(7),
+  .services-grid .service-card:nth-child(8) {
+    grid-column: auto;
   }
 
   .hero {
@@ -546,6 +554,15 @@
   .testimonial-card {
     padding: 2rem 1.5rem;
   }
+
+  .about-strip-inner,
+  .why-inner {
+    gap: 2.5rem;
+  }
+
+  .why-point { padding: 1rem; }
+
+  .stars { margin-left: 0; }
   .visual-hexagon {
   position: relative;
   top: auto;

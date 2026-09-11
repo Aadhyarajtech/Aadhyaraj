@@ -271,3 +271,23 @@ img { max-width: 100%; }
 @media (max-width: 768px) {
   .container { padding: 0 1.25rem; }
 }
+
+@media (max-width: 767px) {
+  .container {
+    width: 100%;
+    min-width: 0;
+    padding: 0 1rem;
+  }
+
+  .section-title,
+  .section-subtitle,
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    overflow-wrap: anywhere;
+  }
+}
