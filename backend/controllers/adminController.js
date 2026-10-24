@@ -105,16 +105,28 @@ exports.getProfile = async (req, res) => {
 exports.updateProfile = async (req, res) => {
   try {
     const { username, email, currentPassword, newPassword } = req.body;
-    const admin = await Admin.findById(req.admin.id);
+    const admin = await Admin.findById(req.admin.id).select('+password');
 
     if (!admin) {
       return sendError(res, 'Admin not found', 404);
     }
 
     // If updating password, verify current password
+    if (currentPassword && !newPassword) {
+      return sendError(res, 'New password is required to change password', 400);
+    }
+
     if (newPassword) {
-      if (!currentPassword) {
+      if (!currentPassword || typeof currentPassword !== 'string') {
         return sendError(res, 'Current password is required to set new password', 400);
+      }
+
+      if (typeof newPassword !== 'string' || newPassword.length < 8) {
+        return sendError(res, 'New password must be at least 8 characters', 400);
+      }
+
+      if (newPassword === currentPassword) {
+        return sendError(res, 'New password must be different from current password', 400);
       }
 
       const isMatch = await bcrypt.compare(currentPassword, admin.password);
@@ -122,9 +134,8 @@ exports.updateProfile = async (req, res) => {
         return sendError(res, 'Current password is incorrect', 400);
       }
 
-      // Hash new password
-      const salt = await bcrypt.genSalt(10);
-      admin.password = await bcrypt.hash(newPassword, salt);
+      // Assign plain password; the Admin model's pre-save hook hashes it once
+      admin.password = newPassword;
     }
 
     // Update other fields
