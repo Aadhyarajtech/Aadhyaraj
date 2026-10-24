@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from '../api';
 import { toast } from 'react-toastify';
@@ -8,6 +8,12 @@ const AdminDashboard = () => {
   const navigate = useNavigate();
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [showPasswordModal, setShowPasswordModal] = useState(false);
+  const [passwordForm, setPasswordForm] = useState({ currentPassword: '', newPassword: '', confirmPassword: '' });
+  const [passwordError, setPasswordError] = useState('');
+  const [changingPassword, setChangingPassword] = useState(false);
+  const [showPasswords, setShowPasswords] = useState(false);
+  const passwordSubmittingRef = useRef(false);
   let admin = null;
   try {
     const storedAdmin = localStorage.getItem('aadhyaraj_admin');
@@ -23,6 +29,70 @@ const AdminDashboard = () => {
     toast.info('Logged out successfully.');
     navigate('/admin');
   }, [navigate]);
+
+  const openPasswordModal = () => {
+    setPasswordError('');
+    setPasswordForm({ currentPassword: '', newPassword: '', confirmPassword: '' });
+    setShowPasswords(false);
+    setShowPasswordModal(true);
+  };
+
+  const closePasswordModal = () => {
+    if (changingPassword) return;
+    setShowPasswordModal(false);
+    setPasswordError('');
+    setPasswordForm({ currentPassword: '', newPassword: '', confirmPassword: '' });
+    setShowPasswords(false);
+  };
+
+  const handlePasswordInput = (e) => {
+    const { name, value } = e.target;
+    setPasswordForm(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handlePasswordSubmit = async (e) => {
+    e.preventDefault();
+    if (passwordSubmittingRef.current) return;
+    setPasswordError('');
+
+    const { currentPassword, newPassword, confirmPassword } = passwordForm;
+    if (!currentPassword || !newPassword || !confirmPassword) {
+      setPasswordError('All password fields are required.');
+      return;
+    }
+    if (newPassword.length < 8) {
+      setPasswordError('New password must be at least 8 characters.');
+      return;
+    }
+    if (newPassword === currentPassword) {
+      setPasswordError('New password must be different from the current password.');
+      return;
+    }
+    if (newPassword !== confirmPassword) {
+      setPasswordError('New password and confirmation do not match.');
+      return;
+    }
+
+    passwordSubmittingRef.current = true;
+    setChangingPassword(true);
+    try {
+      const token = localStorage.getItem('aadhyaraj_token');
+      await axios.put('/api/admin/profile', { currentPassword, newPassword }, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      toast.success('Password updated successfully.');
+      setPasswordForm({ currentPassword: '', newPassword: '', confirmPassword: '' });
+      setShowPasswords(false);
+      setShowPasswordModal(false);
+    } catch (error) {
+      const message = error.response?.data?.message || 'Unable to change password. Please try again.';
+      setPasswordError(message);
+      toast.error(message);
+    } finally {
+      passwordSubmittingRef.current = false;
+      setChangingPassword(false);
+    }
+  };
 
   useEffect(() => {
     const token = localStorage.getItem('aadhyaraj_token');
@@ -61,7 +131,10 @@ const AdminDashboard = () => {
             <h1 className="section-title">Admin Dashboard</h1>
             <p>Manage site content, review applications, and keep your business data updated from one place.</p>
           </div>
-          <button className="btn-outline logout-btn" onClick={logout}>Logout</button>
+          <div className="admin-hero-actions">
+            <button className="btn-outline logout-btn" onClick={openPasswordModal}>Change Password</button>
+            <button className="btn-outline logout-btn" onClick={logout}>Logout</button>
+          </div>
         </div>
       </section>
 
@@ -126,6 +199,74 @@ const AdminDashboard = () => {
           </div>
         </div>
       </section>
+      {showPasswordModal && (
+        <div
+          className="password-modal-backdrop"
+          onMouseDown={(e) => { if (e.target === e.currentTarget) closePasswordModal(); }}
+        >
+          <div className="password-modal" role="dialog" aria-modal="true" aria-labelledby="change-password-title">
+            <div className="password-modal-header">
+              <h2 id="change-password-title">Change Password</h2>
+              <button type="button" className="password-modal-close" onClick={closePasswordModal} aria-label="Close change password form" disabled={changingPassword}>×</button>
+            </div>
+            <form className="password-form" onSubmit={handlePasswordSubmit} noValidate>
+              <div className="password-field">
+                <label htmlFor="currentPassword">Current Password</label>
+                <input
+                  id="currentPassword"
+                  name="currentPassword"
+                  type={showPasswords ? 'text' : 'password'}
+                  value={passwordForm.currentPassword}
+                  onChange={handlePasswordInput}
+                  autoComplete="current-password"
+                  required
+                  autoFocus
+                  disabled={changingPassword}
+                />
+              </div>
+              <div className="password-field">
+                <label htmlFor="newPassword">New Password</label>
+                <input
+                  id="newPassword"
+                  name="newPassword"
+                  type={showPasswords ? 'text' : 'password'}
+                  value={passwordForm.newPassword}
+                  onChange={handlePasswordInput}
+                  autoComplete="new-password"
+                  minLength={8}
+                  required
+                  disabled={changingPassword}
+                />
+                <span className="password-hint">At least 8 characters.</span>
+              </div>
+              <div className="password-field">
+                <label htmlFor="confirmPassword">Confirm New Password</label>
+                <input
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  type={showPasswords ? 'text' : 'password'}
+                  value={passwordForm.confirmPassword}
+                  onChange={handlePasswordInput}
+                  autoComplete="new-password"
+                  required
+                  disabled={changingPassword}
+                />
+              </div>
+              <label className="password-show-toggle">
+                <input type="checkbox" checked={showPasswords} onChange={(e) => setShowPasswords(e.target.checked)} disabled={changingPassword} />
+                Show passwords
+              </label>
+              {passwordError && <p className="password-error" role="alert">{passwordError}</p>}
+              <div className="password-form-actions">
+                <button type="button" className="btn-outline" onClick={closePasswordModal} disabled={changingPassword}>Cancel</button>
+                <button type="submit" className="btn-primary" disabled={changingPassword} aria-busy={changingPassword}>
+                  {changingPassword ? 'Updating…' : 'Update Password'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </main>
   );
 };
