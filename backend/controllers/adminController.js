@@ -159,6 +159,59 @@ exports.updateProfile = async (req, res) => {
   }
 };
 
+// @desc Change the Career Page (career admin) password
+// @route PUT /api/admin/career-password
+exports.updateCareerPassword = async (req, res) => {
+  try {
+    const { currentPassword, newPassword } = req.body;
+
+    if (!currentPassword || !newPassword) {
+      return sendError(res, 'Current and new Career Page passwords are required', 400);
+    }
+
+    if (typeof currentPassword !== 'string' || typeof newPassword !== 'string') {
+      return sendError(res, 'Invalid password format', 400);
+    }
+
+    if (newPassword.length < 8) {
+      return sendError(res, 'New password must be at least 8 characters', 400);
+    }
+
+    if (newPassword === currentPassword) {
+      return sendError(res, 'New password must be different from current password', 400);
+    }
+
+    // The Career Page is managed by the career admin account; select the
+    // password hash explicitly because the model excludes it by default.
+    const careerAdmin = await Admin.findOne({ role: 'careeradmin' })
+      .sort({ createdAt: 1 })
+      .select('+password');
+
+    if (!careerAdmin) {
+      return sendError(res, 'Career Page administrator account not found', 404);
+    }
+
+    const isMatch = await bcrypt.compare(currentPassword, careerAdmin.password);
+    if (!isMatch) {
+      return sendError(res, 'Current Career Page password is incorrect', 400);
+    }
+
+    // Assign plain password; the Admin model's pre-save hook hashes it once
+    careerAdmin.password = newPassword;
+    await careerAdmin.save();
+
+    sendSuccess(res, 'Career Page password updated successfully', {
+      id: careerAdmin._id,
+      username: careerAdmin.username,
+      email: careerAdmin.email,
+      role: careerAdmin.role
+    });
+  } catch (error) {
+    console.error('Update career page password error:', error);
+    sendError(res, 'Failed to update Career Page password', 500);
+  }
+};
+
 // @desc Get dashboard statistics
 // @route GET /api/admin/dashboard
 exports.getDashboard = async (req, res) => {

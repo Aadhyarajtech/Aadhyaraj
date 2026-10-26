@@ -9,6 +9,7 @@ const AdminDashboard = () => {
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
   const [showPasswordModal, setShowPasswordModal] = useState(false);
+  const [passwordMode, setPasswordMode] = useState('admin');
   const [passwordForm, setPasswordForm] = useState({ currentPassword: '', newPassword: '', confirmPassword: '' });
   const [passwordError, setPasswordError] = useState('');
   const [changingPassword, setChangingPassword] = useState(false);
@@ -30,7 +31,8 @@ const AdminDashboard = () => {
     navigate('/admin');
   }, [navigate]);
 
-  const openPasswordModal = () => {
+  const openPasswordModal = (mode = 'admin') => {
+    setPasswordMode(mode);
     setPasswordError('');
     setPasswordForm({ currentPassword: '', newPassword: '', confirmPassword: '' });
     setShowPasswords(false);
@@ -41,6 +43,7 @@ const AdminDashboard = () => {
     if (changingPassword) return;
     setShowPasswordModal(false);
     setPasswordError('');
+    setPasswordMode('admin');
     setPasswordForm({ currentPassword: '', newPassword: '', confirmPassword: '' });
     setShowPasswords(false);
   };
@@ -54,6 +57,7 @@ const AdminDashboard = () => {
     e.preventDefault();
     if (passwordSubmittingRef.current) return;
     setPasswordError('');
+    const isCareerPassword = passwordMode === 'career';
 
     const { currentPassword, newPassword, confirmPassword } = passwordForm;
     if (!currentPassword || !newPassword || !confirmPassword) {
@@ -77,15 +81,17 @@ const AdminDashboard = () => {
     setChangingPassword(true);
     try {
       const token = localStorage.getItem('aadhyaraj_token');
-      await axios.put('/api/admin/profile', { currentPassword, newPassword }, {
+      const endpoint = isCareerPassword ? '/api/admin/career-password' : '/api/admin/profile';
+      await axios.put(endpoint, { currentPassword, newPassword }, {
         headers: { Authorization: `Bearer ${token}` }
       });
-      toast.success('Password updated successfully.');
+      toast.success(isCareerPassword ? 'Career Page password updated successfully.' : 'Password updated successfully.');
       setPasswordForm({ currentPassword: '', newPassword: '', confirmPassword: '' });
       setShowPasswords(false);
       setShowPasswordModal(false);
     } catch (error) {
-      const message = error.response?.data?.message || 'Unable to change password. Please try again.';
+      const message = error.response?.data?.message ||
+        (isCareerPassword ? 'Unable to change the Career Page password. Please try again.' : 'Unable to change password. Please try again.');
       setPasswordError(message);
       toast.error(message);
     } finally {
@@ -132,7 +138,12 @@ const AdminDashboard = () => {
             <p>Manage site content, review applications, and keep your business data updated from one place.</p>
           </div>
           <div className="admin-hero-actions">
-            <button className="btn-outline logout-btn" onClick={openPasswordModal}>Change Password</button>
+            <button className="btn-outline logout-btn" onClick={() => openPasswordModal('admin')}>Change Password</button>
+            {isSuperAdmin && (
+              <button className="btn-outline logout-btn" onClick={() => openPasswordModal('career')}>
+                Change Career Page Password
+              </button>
+            )}
             <button className="btn-outline logout-btn" onClick={logout}>Logout</button>
           </div>
         </div>
@@ -206,12 +217,21 @@ const AdminDashboard = () => {
         >
           <div className="password-modal" role="dialog" aria-modal="true" aria-labelledby="change-password-title">
             <div className="password-modal-header">
-              <h2 id="change-password-title">Change Password</h2>
+              <div>
+                <h2 id="change-password-title">
+                  {passwordMode === 'career' ? 'Change Career Page Password' : 'Change Password'}
+                </h2>
+                {passwordMode === 'career' && (
+                  <p className="password-modal-desc">
+                    Updates the password for the Career Admin login that manages the Careers page and job applications.
+                  </p>
+                )}
+              </div>
               <button type="button" className="password-modal-close" onClick={closePasswordModal} aria-label="Close change password form" disabled={changingPassword}>×</button>
             </div>
             <form className="password-form" onSubmit={handlePasswordSubmit} noValidate>
               <div className="password-field">
-                <label htmlFor="currentPassword">Current Password</label>
+                <label htmlFor="currentPassword">{passwordMode === 'career' ? 'Current Career Page Password' : 'Current Password'}</label>
                 <input
                   id="currentPassword"
                   name="currentPassword"
@@ -225,7 +245,7 @@ const AdminDashboard = () => {
                 />
               </div>
               <div className="password-field">
-                <label htmlFor="newPassword">New Password</label>
+                <label htmlFor="newPassword">{passwordMode === 'career' ? 'New Career Page Password' : 'New Password'}</label>
                 <input
                   id="newPassword"
                   name="newPassword"
@@ -240,7 +260,7 @@ const AdminDashboard = () => {
                 <span className="password-hint">At least 8 characters.</span>
               </div>
               <div className="password-field">
-                <label htmlFor="confirmPassword">Confirm New Password</label>
+                <label htmlFor="confirmPassword">{passwordMode === 'career' ? 'Confirm New Career Page Password' : 'Confirm New Password'}</label>
                 <input
                   id="confirmPassword"
                   name="confirmPassword"
@@ -260,7 +280,7 @@ const AdminDashboard = () => {
               <div className="password-form-actions">
                 <button type="button" className="btn-outline" onClick={closePasswordModal} disabled={changingPassword}>Cancel</button>
                 <button type="submit" className="btn-primary" disabled={changingPassword} aria-busy={changingPassword}>
-                  {changingPassword ? 'Updating…' : 'Update Password'}
+                  {changingPassword ? 'Updating…' : passwordMode === 'career' ? 'Update Career Page Password' : 'Update Password'}
                 </button>
               </div>
             </form>
